@@ -478,6 +478,58 @@ input.invalid, select.invalid {
   line-height: 1.6;
 }
 
+/* ── PWA Install Banner ── */
+.install-banner {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  background: #1e293b;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  padding-bottom: calc(14px + env(safe-area-inset-bottom));
+  z-index: 1000;
+  box-shadow: 0 -4px 20px rgba(0,0,0,.25);
+  border-top: 1px solid rgba(255,255,255,.1);
+}
+.install-banner.hidden { display: none; }
+.install-icon { font-size: 26px; flex-shrink: 0; }
+.install-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.install-text strong { font-size: 14px; }
+.install-text span { font-size: 12px; color: rgba(255,255,255,.6); }
+.install-accept {
+  background: var(--blue);
+  color: #fff;
+  border: none;
+  padding: 9px 18px;
+  border-radius: 7px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.install-dismiss {
+  background: transparent;
+  color: rgba(255,255,255,.5);
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 4px 6px;
+  flex-shrink: 0;
+}
+
+/* ── Mobile: safe area & touch polish ── */
+@supports (padding: env(safe-area-inset-bottom)) {
+  body { padding-bottom: calc(80px + env(safe-area-inset-bottom)); }
+  .sticky-footer { bottom: calc(16px + env(safe-area-inset-bottom)); }
+}
+
 /* ── Responsive ── */
 @media (max-width: 540px) {
   .card { padding: 20px 18px; }
@@ -485,4 +537,7 @@ input.invalid, select.invalid {
   .breakdown-grid { grid-template-columns: 1fr; }
   .result-header { flex-direction: column; }
   .hero h1 { font-size: 22px; }
+  .step-bar { padding-top: calc(20px + env(safe-area-inset-top)); }
+  input[type="text"], select { font-size: 16px; } /* prevent iOS zoom */
+  .btn-primary, .btn-secondary { padding: 14px 20px; font-size: 15px; } /* easier tap targets */
 }

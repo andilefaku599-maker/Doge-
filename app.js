@@ -484,6 +484,42 @@ function generatePDF() {
   doc.save(`ERP_Readiness_${safeCompany}.pdf`);
 }
 
+// ── PWA: Service Worker Registration ───────────────────────────────────────
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js').catch(() => {});
+  });
+}
+
+// ── PWA: Install Banner ─────────────────────────────────────────────────────
+
+let deferredInstallPrompt = null;
+
+window.addEventListener('beforeinstallprompt', e => {
+  e.preventDefault();
+  deferredInstallPrompt = e;
+  const banner = document.getElementById('installBanner');
+  if (banner) banner.classList.remove('hidden');
+});
+
+document.getElementById('installBtn')?.addEventListener('click', async () => {
+  if (!deferredInstallPrompt) return;
+  deferredInstallPrompt.prompt();
+  const { outcome } = await deferredInstallPrompt.userChoice;
+  deferredInstallPrompt = null;
+  document.getElementById('installBanner').classList.add('hidden');
+});
+
+document.getElementById('installDismiss')?.addEventListener('click', () => {
+  document.getElementById('installBanner').classList.add('hidden');
+});
+
+window.addEventListener('appinstalled', () => {
+  document.getElementById('installBanner')?.classList.add('hidden');
+  deferredInstallPrompt = null;
+});
+
 // ── Initialise ─────────────────────────────────────────────────────────────
 
 goToPage(1);

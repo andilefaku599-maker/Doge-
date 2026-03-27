@@ -2,8 +2,16 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="ERP Eval" />
+  <meta name="theme-color" content="#1a56db" />
   <title>ERP Readiness Evaluator | Manufacturing CFO</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" href="icon-192.png" />
+  <link rel="icon" type="image/svg+xml" href="icon.svg" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -293,6 +301,17 @@
     </div>
 
   </section>
+
+  <!-- ─── PWA INSTALL BANNER ─── -->
+  <div id="installBanner" class="install-banner hidden">
+    <div class="install-icon">📲</div>
+    <div class="install-text">
+      <strong>Add to Home Screen</strong>
+      <span>Install for offline access on your phone</span>
+    </div>
+    <button id="installBtn" class="install-accept">Install</button>
+    <button id="installDismiss" class="install-dismiss">✕</button>
+  </div>
 
   <script src="app.js"></script>
 </body>
