@@ -1,0 +1,88 @@
+ERP EVALUATOR — iOS .IPA BUILD INSTRUCTIONS
+============================================
+Generated: 2026-03-27
+App ID: com.erpeval.manufacturing
+App Name: ERP Evaluator
+
+REQUIREMENTS
+------------
+  • macOS 13 (Ventura) or later
+  • Xcode 15 or later  (free from Mac App Store)
+  • Apple Developer account (free for device testing, $99/yr for App Store distribution)
+  • CocoaPods  →  sudo gem install cocoapods
+  • Node.js 18+  →  https://nodejs.org
+  • Capacitor CLI  →  npm install -g @capacitor/cli
+
+STEP 1 — Unzip the Xcode project
+---------------------------------
+  unzip ERP_Evaluator_iOS_XcodeProject.zip
+  # This produces the "ios/" directory alongside your web source files.
+
+STEP 2 — Install CocoaPods dependencies
+-----------------------------------------
+  cd ios/App
+  pod install
+  cd ../..
+
+STEP 3 — Open in Xcode
+------------------------
+  open ios/App/App.xcworkspace
+  # IMPORTANT: open the .xcworkspace, NOT the .xcodeproj
+
+STEP 4 — Configure signing
+----------------------------
+  a. In the Project Navigator, select the "App" target.
+  b. Go to Signing & Capabilities tab.
+  c. Enable "Automatically manage signing".
+  d. Select your Apple Developer Team from the dropdown.
+  e. Xcode will create a provisioning profile automatically.
+
+STEP 5 — Build for a physical device (debug .ipa)
+---------------------------------------------------
+  a. Plug in an iPhone or iPad via USB.
+  b. Select your device in the toolbar scheme selector.
+  c. Product → Run  (or Cmd+R)
+  This sideloads the app directly — no .ipa file is produced, but the app runs.
+
+  To produce a distributable .ipa:
+  a. Product → Archive
+  b. In Organizer, click "Distribute App".
+  c. Choose "Ad Hoc" (for testers) or "App Store Connect" (for App Store).
+  d. Follow the wizard — Xcode will export an .ipa file.
+
+STEP 6 — Sync updated web assets (after any web code change)
+--------------------------------------------------------------
+  From the project root (where package.json lives):
+    npx cap sync ios
+  Then rebuild in Xcode.
+
+STEP 7 — App Store submission (optional)
+-----------------------------------------
+  a. Archive → Distribute App → App Store Connect.
+  b. Log into https://appstoreconnect.apple.com
+  c. Create a new app record (Bundle ID: com.erpeval.manufacturing).
+  d. Upload the build via Xcode Organizer or Transporter.
+  e. Fill in metadata, screenshots, pricing.
+  f. Submit for review.
+
+TROUBLESHOOTING
+---------------
+  "No account for team":  Sign in to Xcode → Preferences → Accounts.
+  "Untrusted developer":  On iPhone → Settings → General → VPN & Device Mgmt → trust your cert.
+  CocoaPods error:        Run  pod repo update  then  pod install  again.
+  Capacitor plugin issues: Run  npx cap update ios  from project root.
+
+CAPACITOR CONFIG (from capacitor.config.json)
+----------------------------------------------
+  appId:   com.erpeval.manufacturing
+  appName: ERP Evaluator
+  webDir:  www
+  server:  androidScheme = https
+
+NOTES
+-----
+  • The app is a PWA wrapped in a native WebView via Capacitor.
+  • All app logic lives in www/ (index.html, style.css, app.js).
+  • No native plugins are used — the WebView renders the full web app.
+  • PDF generation uses jsPDF loaded from cdnjs (requires network on first launch).
+  • The service worker (sw.js) provides offline caching for subsequent launches.
