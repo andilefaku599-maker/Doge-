@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="ERP Eval" />
+  <meta name="theme-color" content="#1a56db" />
+  <title>ERP Readiness Evaluator | Manufacturing CFO</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" href="icon-192.png" />
+  <link rel="icon" type="image/svg+xml" href="icon.svg" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ─── STEP INDICATOR ─── -->
+  <div class="step-bar" id="stepBar">
+    <div class="step active" id="step1Dot"><span>1</span><label>Company Info</label></div>
+    <div class="step-line"></div>
+    <div class="step" id="step2Dot"><span>2</span><label>Assessment</label></div>
+    <div class="step-line"></div>
+    <div class="step" id="step3Dot"><span>3</span><label>Results</label></div>
+  </div>
+
+  <!-- ─── PAGE 1: COMPANY INFO ─── -->
+  <section class="page" id="page1">
+    <div class="card hero">
+      <div class="hero-badge">CFO Decision Tool</div>
+      <h1>ERP Readiness Evaluator</h1>
+      <p class="hero-sub">A structured assessment for manufacturing CFOs to determine whether an ERP upgrade is warranted — and how urgently.</p>
+      <div class="hero-meta">
+        <span>10 questions</span><span class="dot">·</span>
+        <span>~5 minutes</span><span class="dot">·</span>
+        <span>Instant PDF report</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Your Information</h2>
+      <p class="section-note">Used to personalize your PDF report. Nothing is stored or transmitted.</p>
+      <form id="infoForm" novalidate>
+        <div class="form-row two-col">
+          <div class="form-group">
+            <label for="companyName">Company Name <span class="req">*</span></label>
+            <input type="text" id="companyName" placeholder="Acme Manufacturing Co." required />
+          </div>
+          <div class="form-group">
+            <label for="respondentName">Your Name <span class="req">*</span></label>
+            <input type="text" id="respondentName" placeholder="Jane Smith" required />
+          </div>
+        </div>
+        <div class="form-row two-col">
+          <div class="form-group">
+            <label for="jobTitle">Job Title</label>
+            <input type="text" id="jobTitle" placeholder="CFO / VP Finance" />
+          </div>
+          <div class="form-group">
+            <label for="industry">Manufacturing Segment</label>
+            <select id="industry">
+              <option value="">Select segment…</option>
+              <option>Discrete Manufacturing</option>
+              <option>Process Manufacturing</option>
+              <option>Mixed-Mode Manufacturing</option>
+              <option>Contract Manufacturing</option>
+              <option>Engineer-to-Order</option>
+              <option>Other</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row two-col">
+          <div class="form-group">
+            <label for="revenue">Annual Revenue Range</label>
+            <select id="revenue">
+              <option value="">Select range…</option>
+              <option>Under $10M</option>
+              <option>$10M – $50M</option>
+              <option>$50M – $250M</option>
+              <option>$250M – $1B</option>
+              <option>Over $1B</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="currentErp">Current ERP / System</label>
+            <input type="text" id="currentErp" placeholder="SAP, QuickBooks, Oracle, Custom…" />
+          </div>
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="btn-primary">Start Assessment →</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ─── PAGE 2: ASSESSMENT QUESTIONS ─── -->
+  <section class="page hidden" id="page2">
+    <div class="card">
+      <div class="progress-bar-wrap">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+      <p class="progress-label" id="progressLabel">Question 1 of 10</p>
+    </div>
+
+    <form id="assessmentForm" novalidate>
+
+      <!-- Section A -->
+      <div class="section-header">
+        <div class="section-icon">📊</div>
+        <div>
+          <h3>Financial Visibility &amp; Reporting</h3>
+          <p>How well does your current system support financial operations?</p>
+        </div>
+      </div>
+
+      <div class="card question-card" data-q="1">
+        <p class="q-label">Q1 &nbsp;·&nbsp; Financial Close</p>
+        <p class="q-text">How long does your month-end financial close process typically take?</p>
+        <div class="options">
+          <label class="opt"><input type="radio" name="q1" value="1" /><span>Less than 3 days</span></label>
+          <label class="opt"><input type="radio" name="q1" value="2" /><span>3–5 days</span></label>
+          <label class="opt"><input type="radio" name="q1" value="3" /><span>6–10 days</span></label>
+          <label class="opt"><input type="radio" name="q1" value="4" /><span>More than 10 days</span></label>
+        </div>
+      </div>
+
+      <div class="card question-card" data-q="2">
+        <p class="q-label">Q2 &nbsp;·&nbsp; Systems Fragmentation</p>
+        <p class="q-text">How many separate systems or spreadsheets does your team rely on for financial consolidation?</p>
+        <div class="options">
+          <label class="opt"><input type="radio" name="q2" value="1" /><span>1 integrated system</span></label>
+          <label class="opt"><input type="radio" name="q2" value="2" /><span>2–3 systems</span></label>
+          <label class="opt"><input type="radio" name="q2" value="3" /><span>4–5 systems</span></label>
+          <label class="opt"><input type="radio" name="q2" value="4" /><span>6 or more systems</span></label>
+        </div>
+      </div>
+
+      <div class="card question-card" data-q="3">
+        <p class="q-label">Q3 &nbsp;·&nbsp; Real-Time Cost Visibility</p>
+        <p class="q-text">How quickly can you access real-time production cost data (labor, material, overhead)?</p>
+        <div class="options">
+          <label class="opt"><input type="radio" name="q3" value="1" /><span>Always available instantly</span></label>
+          <label class="opt"><input type="radio" name="q3" value="2" /><span>Available within a few hours</span></label>
+          <label class="opt"><input type="radio" name="q3" value="3" /><span>Requires manual compilation (1–2 days)</span></label>
+          <label class="opt"><input type="radio" name="q3" value="4" /><span>Not available or extremely difficult</span></label>
+        </div>
+      </div>
+
+      <!-- Section B -->
+      <div class="section-header">
+        <div class="section-icon">🏭</div>
+        <div>
+          <h3>Operations &amp; Inventory Control</h3>
+          <p>How effectively does your system manage the shop floor and supply chain?</p>
+        </div>
+      </div>
+
+      <div class="card question-card" data-q="4">
+        <p class="q-label">Q4 &nbsp;·&nbsp; Inventory Accuracy</p>
+        <p class="q-text">How often do inventory discrepancies require manual investigation or correction?</p>
+        <div class="options">
+          <label class="opt"><input type="radio" name="q4" value="1" /><span>Rarely — quarterly or less</span></label>
+          <label class="opt"><input type="radio" name="q4" value="2" /><span>Monthly</span></label>
+          <label class="opt"><input type="radio" name="q4" value="3" /><span>Weekly</span></label>
+          <label class="opt"><input type="radio" name="q4" value="4" /><span>Daily or constantly</span></label>
+        </div>
+      </div>
+
+      <div class="card question-card" data-q="5">
+        <p class="q-label">Q5 &nbsp;·&nbsp; Cost Traceability</p>
+        <p class="q-text">How well does your current system track actual vs. standard cost per production or work order?</p>
+        <div class="options">
+          <label class="opt"><input type="radio" name="q5" value="1" /><span>Fully automated with variance reporting</span></label>
+          <label class="opt"><input type="radio" name="q5" value="2" /><span>Mostly automated, some manual steps</span></label>
+          <label class="opt"><input type="radio" name="q5" value="3" /><span>Requires significant manual effort</span></label>
+          <label class="opt"><input type="radio" name="q5" value="4" /><span>Cannot track effectively</span></label>
+        </div>
+      </div>
+
+      <div class="card question-card" data-q="6">
+        <p class="q-label">Q6 &nbsp;·&nbsp; System Integration</p>
+        <p class="q-text">How often does lack of integration between systems cause production delays, billing errors, or duplicate data entry?</p>
+        <div class="options">
+          <label class="opt"><input type="radio" name="q6" value="1" /><span>Rarely — systems are well-integrated</span></label>
+          <label class="opt"><input type="radio" name="q6" value="2" /><span>Occasionally (a few times per month)</span></label>
+          <label class="opt"><input type="radio" name="q6" value="3" /><span>Frequently (weekly)</span></label>
+          <label class="opt"><input type="radio" name="q6" value="4" /><span>Constantly — a significant daily burden</span></label>
+        </div>
+      </div>
+
+      <!-- Section C -->
+      <div class="section-header">
+        <div class="section-icon">📋</div>
+        <div>
+          <h3>Compliance &amp; Audit Readiness</h3>
+          <p>Can your system withstand regulatory scrutiny?</p>
+        </div>
+      </div>
+
+      <div class="card question-card" data-q="7">
+        <p class="q-label">Q7 &nbsp;·&nbsp; Audit Preparedness</p>
+        <p class="q-text">How prepared is your organization for a financial or operational audit today?</p>
+        <div class="options">
+          <label class="opt"><input type="radio" name="q7" value="1" /><span>Fully prepared — all data accessible and traceable</span></label>
+          <label class="opt"><input type="radio" name="q7" value="2" /><span>Mostly prepared with minor documentation gaps</span></label>
+          <label class="opt"><input type="radio" name="q7" value="3" /><span>Partially prepared — significant manual work needed</span></label>
+          <label class="opt"><input type="radio" name="q7" value="4" /><span>Not prepared — would struggle significantly</span></label>
+        </div>
+      </div>
+
+      <div class="card question-card" data-q="8">
+        <p class="q-label">Q8 &nbsp;·&nbsp; Regulatory Compliance</p>
+        <p class="q-text">How effectively does your system manage compliance requirements (tax, customs, environmental, quality standards)?</p>
+        <div class="options">
+          <label class="opt"><input type="radio" name="q8" value="1" /><span>Fully automated compliance tracking</span></label>
+          <label class="opt"><input type="radio" name="q8" value="2" /><span>Mostly handled, some manual workarounds</span></label>
+          <label class="opt"><input type="radio" name="q8" value="3" /><span>Significant manual effort required</span></label>
+          <label class="opt"><input type="radio" name="q8" value="4" /><span>Struggling to maintain compliance</span></label>
+        </div>
+      </div>
+
+      <!-- Section D -->
+      <div class="section-header">
+        <div class="section-icon">🚀</div>
+        <div>
+          <h3>Growth &amp; Scalability</h3>
+          <p>Can your current system support where you're headed?</p>
+        </div>
+      </div>
+
+      <div class="card question-card" data-q="9">
+        <p class="q-label">Q9 &nbsp;·&nbsp; Scalability</p>
+        <p class="q-text">How well can your current ERP support planned growth over the next 3 years (new facilities, product lines, markets, M&amp;A)?</p>
+        <div class="options">
+          <label class="opt"><input type="radio" name="q9" value="1" /><span>Easily scalable — no concerns</span></label>
+          <label class="opt"><input type="radio" name="q9" value="2" /><span>Scalable with moderate effort or investment</span></label>
+          <label class="opt"><input type="radio" name="q9" value="3" /><span>Significant limitations would require workarounds</span></label>
+          <label class="opt"><input type="radio" name="q9" value="4" /><span>Cannot support our planned growth trajectory</span></label>
+        </div>
+      </div>
+
+      <div class="card question-card" data-q="10">
+        <p class="q-label">Q10 &nbsp;·&nbsp; Manual Overhead</p>
+        <p class="q-text">How many hours per week does your finance team spend on manual data entry, re-keying, or reconciliation between systems?</p>
+        <div class="options">
+          <label class="opt"><input type="radio" name="q10" value="1" /><span>Fewer than 5 hours</span></label>
+          <label class="opt"><input type="radio" name="q10" value="2" /><span>5–15 hours</span></label>
+          <label class="opt"><input type="radio" name="q10" value="3" /><span>16–30 hours</span></label>
+          <label class="opt"><input type="radio" name="q10" value="4" /><span>More than 30 hours</span></label>
+        </div>
+      </div>
+
+      <div class="form-actions sticky-footer">
+        <button type="button" class="btn-secondary" onclick="goToPage(1)">← Back</button>
+        <button type="submit" class="btn-primary">Calculate My Score →</button>
+      </div>
+
+    </form>
+  </section>
+
+  <!-- ─── PAGE 3: RESULTS ─── -->
+  <section class="page hidden" id="page3">
+
+    <div class="card result-hero" id="resultHero">
+      <div class="result-header">
+        <div>
+          <p class="result-company" id="resultCompany"></p>
+          <h2>ERP Readiness Assessment Results</h2>
+          <p class="result-date" id="resultDate"></p>
+        </div>
+        <div class="score-circle" id="scoreCircle">
+          <span class="score-num" id="scoreNum">--</span>
+          <span class="score-denom">/40</span>
+        </div>
+      </div>
+      <div class="verdict-box" id="verdictBox">
+        <div class="verdict-label" id="verdictLabel"></div>
+        <p class="verdict-text" id="verdictText"></p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Score Breakdown by Category</h3>
+      <div class="breakdown-grid" id="breakdownGrid"></div>
+    </div>
+
+    <div class="card">
+      <h3>Recommended Next Steps</h3>
+      <ol class="next-steps" id="nextSteps"></ol>
+    </div>
+
+    <div class="card disclaimer-card">
+      <p class="disclaimer">This assessment is intended as a directional decision-support tool for internal use. Scores are based on self-reported responses. Consult a qualified ERP implementation advisor before committing to a procurement or upgrade decision.</p>
+    </div>
+
+    <div class="form-actions sticky-footer">
+      <button type="button" class="btn-secondary" onclick="goToPage(2)">← Retake</button>
+      <button type="button" class="btn-primary" onclick="generatePDF()">⬇ Download PDF Report</button>
+    </div>
+
+  </section>
+
+  <!-- ─── PWA INSTALL BANNER ─── -->
+  <div id="installBanner" class="install-banner hidden">
+    <div class="install-icon">📲</div>
+    <div class="install-text">
+      <strong>Add to Home Screen</strong>
+      <span>Install for offline access on your phone</span>
+    </div>
+    <button id="installBtn" class="install-accept">Install</button>
+    <button id="installDismiss" class="install-dismiss">✕</button>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
