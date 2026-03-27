@@ -3,18 +3,24 @@
    Caches all assets for full offline operation
    ═══════════════════════════════════════════════ */
 
-const CACHE = 'erp-eval-v1';
+const CACHE = 'erp-eval-v2';
 
 const ASSETS = [
   '/',
   '/index.html',
+  '/ios-install.html',
   '/style.css',
   '/app.js',
+  '/jspdf.min.js',
   '/manifest.json',
   '/icon.svg',
   '/icon-192.png',
   '/icon-512.png',
-  'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js',
+  '/apple-icons/apple-touch-icon.png',
+  '/apple-icons/apple-touch-icon-120.png',
+  '/apple-icons/apple-touch-icon-152.png',
+  '/apple-icons/apple-touch-icon-167.png',
+  '/apple-icons/apple-touch-icon-180.png',
 ];
 
 // Install: cache everything

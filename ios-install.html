@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0077B6" />
+  <title>Install on iPhone · ERP Evaluator</title>
+  <link rel="apple-touch-icon" href="apple-icons/apple-touch-icon.png" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cyan:    #00B4D8;
+      --blue:    #0096C7;
+      --deep:    #023E8A;
+      --green:   #059669;
+      --gray-50: #f8fafc;
+      --gray-100:#f0f6fb;
+      --gray-200:#dde4ed;
+      --gray-400:#8fa3b8;
+      --gray-600:#3d5a73;
+      --gray-800:#142840;
+      --grad:    linear-gradient(135deg, #012a5e 0%, #0077B6 55%, #00B4D8 100%);
+      --grad-cta:linear-gradient(135deg, #00B4D8 0%, #0096C7 50%, #0077B6 100%);
+      --shadow:  0 4px 12px rgba(0,75,120,.10), 0 8px 24px rgba(0,75,120,.07);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
+      background: var(--gray-100);
+      color: var(--gray-800);
+      min-height: 100vh;
+      padding-bottom: calc(40px + env(safe-area-inset-bottom, 0px));
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Header ── */
+    .header {
+      background: var(--grad);
+      color: #fff;
+      padding: calc(20px + env(safe-area-inset-top, 0px)) 20px 28px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .header::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 200px; height: 200px;
+      border-radius: 50%;
+      background: rgba(72,202,228,.12);
+    }
+    .app-icon {
+      width: 80px; height: 80px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.15);
+      border: 2px solid rgba(255,255,255,.25);
+      margin: 0 auto 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 36px;
+      box-shadow: 0 8px 24px rgba(0,0,0,.2);
+    }
+    .header h1 { font-size: 22px; font-weight: 800; margin-bottom: 6px; }
+    .header p  { font-size: 14px; color: rgba(255,255,255,.7); }
+
+    /* ── Methods ── */
+    .container { max-width: 520px; margin: 0 auto; padding: 0 16px; }
+
+    .section-title {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+      color: var(--gray-400);
+      padding: 24px 4px 8px;
+    }
+
+    .method-card {
+      background: #fff;
+      border: 1px solid var(--gray-200);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      margin-bottom: 14px;
+    }
+
+    .method-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 18px 20px 14px;
+      border-bottom: 1px solid var(--gray-200);
+    }
+    .method-badge {
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+    .badge-pwa   { background: #e0f7fc; }
+    .badge-xcode { background: #f0f4f8; }
+    .badge-alt   { background: #fff3e0; }
+
+    .method-header h2 { font-size: 16px; font-weight: 700; }
+    .method-header p  { font-size: 12px; color: var(--gray-400); margin-top: 2px; }
+
+    .recommended {
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      background: #d1fae5;
+      color: #065f46;
+      padding: 2px 8px;
+      border-radius: 20px;
+      margin-left: auto;
+      flex-shrink: 0;
+    }
+
+    /* ── Steps ── */
+    .steps { padding: 16px 20px 20px; }
+
+    .step-row {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      margin-bottom: 14px;
+    }
+    .step-row:last-child { margin-bottom: 0; }
+
+    .step-num {
+      flex-shrink: 0;
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      background: var(--grad-cta);
+      color: #fff;
+      font-size: 12px; font-weight: 800;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 2px 8px rgba(0,180,216,.30);
+      margin-top: 1px;
+    }
+
+    .step-content { flex: 1; }
+    .step-content strong { font-size: 14px; font-weight: 700; color: var(--gray-800); display: block; margin-bottom: 3px; }
+    .step-content span   { font-size: 13px; color: var(--gray-600); line-height: 1.5; }
+
+    /* ── Visual step illustrations ── */
+    .step-visual {
+      background: var(--gray-50);
+      border: 1px solid var(--gray-200);
+      border-radius: 10px;
+      padding: 12px 14px;
+      margin-top: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      color: var(--gray-600);
+    }
+    .step-visual .icon { font-size: 20px; flex-shrink: 0; }
+
+    /* ── CTA Button ── */
+    .cta-wrap { padding: 0 16px 8px; }
+    .cta-btn {
+      display: block;
+      width: 100%;
+      padding: 16px;
+      background: var(--grad-cta);
+      color: #fff;
+      font-size: 15px;
+      font-weight: 800;
+      text-align: center;
+      border-radius: 12px;
+      text-decoration: none;
+      box-shadow: 0 4px 20px rgba(0,180,216,.35), 0 8px 32px rgba(0,119,182,.20);
+      transition: transform .2s, box-shadow .2s;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .cta-btn:active { transform: scale(.98); }
+
+    .cta-note {
+      font-size: 12px;
+      color: var(--gray-400);
+      text-align: center;
+      padding: 8px 16px 16px;
+      line-height: 1.5;
+    }
+
+    /* ── Divider ── */
+    .divider { height: 1px; background: var(--gray-200); margin: 4px 20px; }
+
+    /* ── Requirements chip ── */
+    .reqs {
+      padding: 10px 20px 16px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .req-chip {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 20px;
+      background: var(--gray-100);
+      color: var(--gray-600);
+      border: 1px solid var(--gray-200);
+    }
+    .req-chip.green { background: #d1fae5; color: #065f46; border-color: rgba(5,150,105,.2); }
+    .req-chip.amber { background: #fef3c7; color: #92400e; border-color: rgba(217,119,6,.2); }
+    .req-chip.red   { background: #fee2e2; color: #7f1d1d; border-color: rgba(220,38,38,.2); }
+
+    /* ── Notice box ── */
+    .notice {
+      background: #e0f7fc;
+      border: 1px solid rgba(0,180,216,.25);
+      border-radius: 10px;
+      padding: 12px 14px;
+      font-size: 13px;
+      color: var(--gray-600);
+      line-height: 1.55;
+      margin: 0 16px 16px;
+    }
+    .notice strong { color: var(--blue); }
+
+    /* ── Footer ── */
+    .footer {
+      text-align: center;
+      font-size: 12px;
+      color: var(--gray-400);
+      padding: 16px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div class="header">
+    <div class="app-icon">📊</div>
+    <h1>ERP Readiness Evaluator</h1>
+    <p>Install on iPhone &amp; iPad</p>
+  </div>
+
+  <div class="container">
+
+    <!-- ── METHOD 1: PWA (Recommended) ── -->
+    <div class="section-title">Install Options</div>
+
+    <div class="method-card">
+      <div class="method-header">
+        <div class="method-badge badge-pwa">🌐</div>
+        <div>
+          <h2>Add to Home Screen</h2>
+          <p>Works instantly via Safari · No App Store needed</p>
+        </div>
+        <span class="recommended">Recommended</span>
+      </div>
+
+      <div class="steps">
+        <div class="step-row">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <strong>Open this app in Safari</strong>
+            <span>Must use Safari — Chrome &amp; Firefox cannot install PWAs on iOS.</span>
+            <div class="step-visual">
+              <span class="icon">🧭</span>
+              <span>Tap the Safari icon on your home screen, then navigate to this page.</span>
+            </div>
+          </div>
+        </div>
+        <div class="step-row">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <strong>Tap the Share button</strong>
+            <span>The Share button is the square with an arrow pointing up — in the Safari toolbar at the bottom of the screen.</span>
+            <div class="step-visual">
+              <span class="icon">⬆️</span>
+              <span>Bottom centre of Safari → tap <strong>Share</strong></span>
+            </div>
+          </div>
+        </div>
+        <div class="step-row">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <strong>Tap "Add to Home Screen"</strong>
+            <span>Scroll down the share sheet and tap <strong>Add to Home Screen</strong>.</span>
+            <div class="step-visual">
+              <span class="icon">➕</span>
+              <span>Scroll the share sheet → <strong>Add to Home Screen</strong> → <strong>Add</strong></span>
+            </div>
+          </div>
+        </div>
+        <div class="step-row">
+          <div class="step-num">4</div>
+          <div class="step-content">
+            <strong>Tap "Add" to confirm</strong>
+            <span>The app icon appears on your home screen. It opens full-screen with no browser chrome, just like a native app.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+      <div class="cta-wrap" style="padding-top:14px;">
+        <a href="index.html" class="cta-btn">Open App in Safari →</a>
+      </div>
+      <p class="cta-note">Works offline once installed · iOS 16.4+ required for full PWA support</p>
+
+      <div class="reqs">
+        <span class="req-chip green">Free</span>
+        <span class="req-chip green">No Apple ID needed</span>
+        <span class="req-chip green">Offline capable</span>
+        <span class="req-chip amber">Safari only</span>
+        <span class="req-chip amber">iOS 16.4+</span>
+      </div>
+    </div>
+
+    <!-- ── METHOD 2: Xcode (Mac required) ── -->
+    <div class="method-card">
+      <div class="method-header">
+        <div class="method-badge badge-xcode">💻</div>
+        <div>
+          <h2>Build with Xcode</h2>
+          <p>Full native app · Requires a Mac</p>
+        </div>
+      </div>
+
+      <div class="notice">
+        <strong>The Xcode project is ready.</strong> Download <code>ERP_Evaluator_iOS_XcodeProject.zip</code> from the repo, open on a Mac with Xcode, and run directly to your iPhone via USB.
+      </div>
+
+      <div class="steps">
+        <div class="step-row">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <strong>Download the Xcode project</strong>
+            <span>Get <code>ERP_Evaluator_iOS_XcodeProject.zip</code> from the GitHub repo.</span>
+          </div>
+        </div>
+        <div class="step-row">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <strong>Install dependencies</strong>
+            <span>On your Mac, open Terminal in the <code>ios/App</code> folder and run: <code>pod install</code></span>
+          </div>
+        </div>
+        <div class="step-row">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <strong>Open in Xcode &amp; connect your iPhone</strong>
+            <span>Open <code>App.xcworkspace</code>, select your device, tap ▶ Run.</span>
+          </div>
+        </div>
+        <div class="step-row">
+          <div class="step-num">4</div>
+          <div class="step-content">
+            <strong>Trust the developer certificate</strong>
+            <span>On iPhone: Settings → General → VPN &amp; Device Management → Trust your Apple ID.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="reqs">
+        <span class="req-chip green">Free Apple ID OK</span>
+        <span class="req-chip amber">Mac required</span>
+        <span class="req-chip amber">Xcode 15+</span>
+        <span class="req-chip red">Re-sign every 7 days (free) or $99/yr</span>
+      </div>
+    </div>
+
+    <!-- ── METHOD 3: AltStore ── -->
+    <div class="method-card">
+      <div class="method-header">
+        <div class="method-badge badge-alt">🔄</div>
+        <div>
+          <h2>AltStore Sideload</h2>
+          <p>Install IPA without App Store · No Mac needed after setup</p>
+        </div>
+      </div>
+
+      <div class="steps">
+        <div class="step-row">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <strong>Install AltStore on your iPhone</strong>
+            <span>Download AltStore from <strong>altstore.io</strong> using AltInstaller on a PC or Mac.</span>
+          </div>
+        </div>
+        <div class="step-row">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <strong>Build a signed IPA on a Mac</strong>
+            <span>Use the Xcode project to Archive → Export → Ad Hoc distribution. This produces a signed <code>.ipa</code> file.</span>
+          </div>
+        </div>
+        <div class="step-row">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <strong>Sideload via AltStore</strong>
+            <span>Open AltStore on your iPhone, tap <strong>+</strong>, select the <code>.ipa</code> file, install.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="reqs">
+        <span class="req-chip amber">AltStore setup required</span>
+        <span class="req-chip amber">Mac needed once (to sign)</span>
+        <span class="req-chip red">Refresh every 7 days (free tier)</span>
+      </div>
+    </div>
+
+    <!-- ── Bottom note ── -->
+    <div class="notice" style="margin-top:8px;">
+      <strong>Tip:</strong> The <strong>Add to Home Screen</strong> method (Option 1) is the fastest and needs no developer account, Mac, or extra tools. For most CFOs evaluating the app, this is all you need.
+    </div>
+
+  </div>
+
+  <div class="footer">
+    ERP Readiness Evaluator · Manufacturing CFO Tool<br>
+    Built with Capacitor · iOS 16.4+
+  </div>
+
+</body>
+</html>
