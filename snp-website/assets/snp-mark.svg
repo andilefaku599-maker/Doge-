@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="SNP Consulting mark">
+  <g fill="none" stroke="currentColor" stroke-linecap="round">
+    <!-- outer frame -->
+    <rect x="10" y="10" width="180" height="180" stroke-width="10"/>
+    <!-- connective path: top-middle -> right-middle -> centre -> bottom-left -> bottom-middle -->
+    <path d="M100 58 L146 100 M146 100 L100 100 M100 100 L54 142 M54 142 L100 142" stroke-width="15"/>
+  </g>
+  <g fill="currentColor">
+    <!-- solid nodes -->
+    <circle cx="54" cy="58" r="21"/>
+    <circle cx="146" cy="58" r="21"/>
+    <circle cx="54" cy="142" r="21"/>
+    <circle cx="146" cy="142" r="21"/>
+    <circle cx="100" cy="100" r="25"/>
+  </g>
+  <g fill="none" stroke="currentColor" stroke-width="13">
+    <!-- ring nodes -->
+    <circle cx="100" cy="58" r="14.5"/>
+    <circle cx="54" cy="100" r="14.5"/>
+    <circle cx="146" cy="100" r="14.5"/>
+    <circle cx="100" cy="142" r="14.5"/>
+  </g>
+</svg>
