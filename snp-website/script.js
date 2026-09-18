@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════
-   SNP Consulting — site behaviour
+   SNP Consulting: site behaviour
    ═══════════════════════════════════════════ */
 
 'use strict';
@@ -72,7 +72,7 @@ if (reduceMotion || !('IntersectionObserver' in window)) {
 // ── Contact form ─────────────────────────────────────────────────────────────
 //
 // No backend: the form composes a mailto: draft. To switch to a hosted handler
-// (Formspree, Netlify Forms, Web3Forms), see README.md — set ENDPOINT below and
+// (Formspree, Netlify Forms, Web3Forms), see README.md: set ENDPOINT below and
 // the submit handler will POST instead.
 
 const ENDPOINT = '';                                // e.g. 'https://formspree.io/f/xxxxxxx'
@@ -118,7 +118,7 @@ form.addEventListener('submit', async (e) => {
       });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       form.reset();
-      setNote('Thank you — we will come back to you within one business day.');
+      setNote('Thank you. We will come back to you within one business day.');
     } catch (err) {
       setNote(`Could not send. Please email ${INBOX} directly.`);
     }
@@ -137,7 +137,7 @@ form.addEventListener('submit', async (e) => {
   ].join('\n');
 
   const href = `mailto:${INBOX}?subject=${encodeURIComponent(
-    `Website enquiry — ${data.company}`
+    `Website enquiry from ${data.company}`
   )}&body=${encodeURIComponent(body)}`;
 
   window.location.href = href;
