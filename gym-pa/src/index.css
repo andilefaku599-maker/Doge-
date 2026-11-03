@@ -1,0 +1,31 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #0b0d10;
+  --color-surface: #151a20;
+  --color-surface2: #1f252d;
+  --color-line: #2b333d;
+  --color-ink: #f4f6f8;
+  --color-muted: #a3adba;
+  --color-accent: #c8f135;
+  --color-accent-ink: #0b0d10;
+  --color-warn: #ffb547;
+  --color-danger: #ff6b6b;
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+html, body, #root { height: 100%; }
+body {
+  background: var(--color-bg);
+  color: var(--color-ink);
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior-y: none;
+  font-variant-numeric: tabular-nums;
+}
+button { cursor: pointer; touch-action: manipulation; }
+button:disabled { cursor: default; opacity: .45; }
+:focus-visible { outline: 3px solid var(--color-accent); outline-offset: 2px; }
+input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+input[type=number] { -moz-appearance: textfield; }
+.pb-safe { padding-bottom: max(env(safe-area-inset-bottom), 0px); }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
